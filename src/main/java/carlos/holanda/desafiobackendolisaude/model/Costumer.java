@@ -1,12 +1,20 @@
 package carlos.holanda.desafiobackendolisaude.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "costumers")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Costumer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
