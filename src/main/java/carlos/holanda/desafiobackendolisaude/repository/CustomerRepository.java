@@ -11,7 +11,6 @@ import java.util.List;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Override
     default List<Customer> findAll() {
-        List<Customer> orderedCustomers = findAll(Sort.by("name").ascending());
-        return orderedCustomers;
+        return findAll(Sort.by("name").ascending());
     }
 }
