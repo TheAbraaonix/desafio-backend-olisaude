@@ -13,11 +13,11 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public List<Customer> findAll() {
+    public List<Customer> listAll() {
         return customerRepository.findAll();
     }
 
-    public Optional<Customer> findOne(Long id) {
+    public Optional<Customer> listById(Long id) {
         Optional<Customer> foundCustomer = customerRepository.findById(id);
         if(foundCustomer.isEmpty()) {
             throw new RuntimeException("Customer does not exist.");
@@ -34,6 +34,6 @@ public class CustomerService {
         if(deleteCustomer.isEmpty()) {
             throw new RuntimeException("Customer does not exist.;");
         }
-        return findAll();
+        return listAll();
     }
 }
