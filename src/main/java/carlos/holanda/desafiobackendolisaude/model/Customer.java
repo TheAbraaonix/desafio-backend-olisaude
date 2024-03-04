@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "costumers")
+@Table(name = "customers")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -25,6 +25,6 @@ public class Customer {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "costumer_id")
+    @JoinColumn(name = "customer_id")
     private List<HealthProblem> healthProblems;
 }
