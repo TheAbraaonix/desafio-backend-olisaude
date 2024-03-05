@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -25,7 +27,9 @@ public class Customer {
     private String name;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    @CreationTimestamp
     private LocalDateTime createdAt;
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
@@ -34,7 +38,5 @@ public class Customer {
     public Customer(CustomerRequest request) {
         this.name = request.name();
         this.gender = request.gender();
-        this.createdAt = request.createdAt();
-        this.updatedAt = request.updatedAt();
     }
 }

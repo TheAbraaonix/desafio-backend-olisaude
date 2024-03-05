@@ -7,9 +7,6 @@ import java.time.LocalDateTime;
 public record CustomerRequest(
 
         String name,
-        Gender gender,
-        LocalDateTime createdAt,
-        LocalDateTime updatedAt
-
+        Gender gender
 ) {
 }
