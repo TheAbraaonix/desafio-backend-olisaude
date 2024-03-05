@@ -1,10 +1,13 @@
 package carlos.holanda.desafiobackendolisaude.model;
 
+import carlos.holanda.desafiobackendolisaude.dto.CustomerRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,4 +30,11 @@ public class Customer {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private List<HealthProblem> healthProblems;
+
+    public Customer(CustomerRequest request) {
+        this.name = request.name();
+        this.gender = request.gender();
+        this.createdAt = request.createdAt();
+        this.updatedAt = request.updatedAt();
+    }
 }

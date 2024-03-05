@@ -1,5 +1,6 @@
 package carlos.holanda.desafiobackendolisaude.service;
 
+import carlos.holanda.desafiobackendolisaude.dto.CustomerRequest;
 import carlos.holanda.desafiobackendolisaude.model.Customer;
 import carlos.holanda.desafiobackendolisaude.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,9 @@ public class CustomerService {
         return foundCustomer;
     }
 
-    public Customer create(Customer customer) {
-        return customerRepository.save(customer);
+    public Customer create(CustomerRequest customer) {
+        Customer newCustomer = new Customer(customer);
+        return customerRepository.save(newCustomer);
     }
 
     public List<Customer> delete(Long id) {

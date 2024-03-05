@@ -1,5 +1,6 @@
 package carlos.holanda.desafiobackendolisaude.controller;
 
+import carlos.holanda.desafiobackendolisaude.dto.CustomerRequest;
 import carlos.holanda.desafiobackendolisaude.model.Customer;
 import carlos.holanda.desafiobackendolisaude.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<Customer> create(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> create(@RequestBody CustomerRequest customer) {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.create(customer));
     }
 
