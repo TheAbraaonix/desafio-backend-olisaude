@@ -1,6 +1,7 @@
 package carlos.holanda.desafiobackendolisaude.service;
 
 import carlos.holanda.desafiobackendolisaude.dto.CustomerRequest;
+import carlos.holanda.desafiobackendolisaude.exception.RecordNotFoundException;
 import carlos.holanda.desafiobackendolisaude.model.Customer;
 import carlos.holanda.desafiobackendolisaude.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,8 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public Optional<Customer> listById(Long id) {
-        Optional<Customer> foundCustomer = customerRepository.findById(id);
-        if(foundCustomer.isEmpty()) {
-            throw new RuntimeException("Customer does not exist.");
-        }
-        return foundCustomer;
+    public Customer listById(Long id) {
+        return customerRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
     public Customer create(CustomerRequest customer) {
@@ -32,7 +29,7 @@ public class CustomerService {
     }
 
     public List<Customer> delete(Long id) {
-        Customer deleteCustomer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer does not exist."));
+        Customer deleteCustomer = customerRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
         customerRepository.delete(deleteCustomer);
         return listAll();
     }
