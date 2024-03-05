@@ -21,7 +21,7 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.listAll());
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Customer>> listById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.FOUND).body(customerService.listById(id));
     }
@@ -31,7 +31,7 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.create(customer));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<List<Customer>> delete(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.delete(id));
     }

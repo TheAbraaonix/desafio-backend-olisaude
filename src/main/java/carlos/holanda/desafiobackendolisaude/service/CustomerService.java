@@ -30,10 +30,8 @@ public class CustomerService {
     }
 
     public List<Customer> delete(Long id) {
-        Optional<Customer> deleteCustomer = customerRepository.findById(id);
-        if(deleteCustomer.isEmpty()) {
-            throw new RuntimeException("Customer does not exist.;");
-        }
+        Customer deleteCustomer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer does not exist."));
+        customerRepository.delete(deleteCustomer);
         return listAll();
     }
 }
