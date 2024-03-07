@@ -4,16 +4,17 @@ import carlos.holanda.desafiobackendolisaude.dto.CustomerRequest;
 import carlos.holanda.desafiobackendolisaude.exception.RecordNotFoundException;
 import carlos.holanda.desafiobackendolisaude.model.Customer;
 import carlos.holanda.desafiobackendolisaude.repository.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerService {
-    @Autowired
     private CustomerRepository customerRepository;
+
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     public List<Customer> listAll() {
         return customerRepository.findAll();
