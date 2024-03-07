@@ -2,6 +2,7 @@ package carlos.holanda.desafiobackendolisaude.service;
 
 import carlos.holanda.desafiobackendolisaude.dto.CustomerRequest;
 import carlos.holanda.desafiobackendolisaude.exception.RecordNotFoundException;
+import carlos.holanda.desafiobackendolisaude.mapper.CustomerMapper;
 import carlos.holanda.desafiobackendolisaude.model.Customer;
 import carlos.holanda.desafiobackendolisaude.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,11 @@ import java.util.List;
 @Service
 public class CustomerService {
     private CustomerRepository customerRepository;
+    private CustomerMapper customerMapper;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
+        this.customerMapper = customerMapper;
     }
 
     public List<Customer> listAll() {
@@ -25,7 +28,7 @@ public class CustomerService {
     }
 
     public Customer create(CustomerRequest customer) {
-        Customer newCustomer = new Customer(customer);
+        Customer newCustomer = customerMapper.toEntity(customer);
         return customerRepository.save(newCustomer);
     }
 

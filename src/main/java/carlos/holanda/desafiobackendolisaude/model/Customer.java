@@ -44,12 +44,6 @@ public class Customer {
         this.updatedAt = updatedAt;
     }
 
-    public Customer(CustomerRequest request) {
-        this.name = request.name();
-        this.birthDate = request.birthDate();
-        this.gender = request.gender();
-    }
-
     public Long getId() {
         return id;
     }
