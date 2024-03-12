@@ -7,7 +7,6 @@ import carlos.holanda.desafiobackendolisaude.model.Customer;
 import carlos.holanda.desafiobackendolisaude.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
