@@ -17,6 +17,9 @@ public class HealthProblem {
     private String name;
     @NotNull
     private Degree degree;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
     public HealthProblem() {
     }
