@@ -47,6 +47,14 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerResponse);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<CustomerResponse> update(@PathVariable @NotNull @Positive Long id,
+                                                   @RequestBody @Valid CustomerRequest customer) {
+        Customer updatedCustomer = customerService.update(id, customer);
+        CustomerResponse customerResponse = customerMapper.toDTO(updatedCustomer);
+        return ResponseEntity.status(HttpStatus.OK).body(customerResponse);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<List<CustomerResponse>> delete(@PathVariable @NotNull @Positive  Long id) {
         List<CustomerResponse> customerResponseList = customerService.delete(id)

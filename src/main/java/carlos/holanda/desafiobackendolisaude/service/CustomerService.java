@@ -7,6 +7,7 @@ import carlos.holanda.desafiobackendolisaude.model.Customer;
 import carlos.holanda.desafiobackendolisaude.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -30,6 +31,18 @@ public class CustomerService {
     public Customer create(CustomerRequest customer) {
         Customer newCustomer = customerMapper.toEntity(customer);
         return customerRepository.save(newCustomer);
+    }
+
+    public Customer update(Long id, CustomerRequest customer) {
+        return customerRepository.findById(id)
+                .map(recordFound -> {
+                    Customer foundCustomer = customerMapper.toEntity(customer);
+                    recordFound.setName(foundCustomer.getName());
+                    recordFound.setBirthDate(foundCustomer.getBirthDate());
+                    recordFound.setGender(foundCustomer.getGender());
+
+                    return customerRepository.save(recordFound);
+                }).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
     public List<Customer> delete(Long id) {
