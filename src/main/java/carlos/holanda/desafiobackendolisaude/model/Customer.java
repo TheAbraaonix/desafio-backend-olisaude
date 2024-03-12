@@ -1,6 +1,6 @@
 package carlos.holanda.desafiobackendolisaude.model;
 
-import carlos.holanda.desafiobackendolisaude.dto.CustomerRequest;
+import carlos.holanda.desafiobackendolisaude.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;

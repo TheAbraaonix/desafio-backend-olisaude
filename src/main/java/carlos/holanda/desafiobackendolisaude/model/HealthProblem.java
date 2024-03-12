@@ -1,5 +1,6 @@
 package carlos.holanda.desafiobackendolisaude.model;
 
+import carlos.holanda.desafiobackendolisaude.enums.Degree;
 import jakarta.persistence.*;
 
 @Entity

@@ -1,4 +1,4 @@
-package carlos.holanda.desafiobackendolisaude.model;
+package carlos.holanda.desafiobackendolisaude.enums;
 
 public enum Degree {
     LOW(1),
