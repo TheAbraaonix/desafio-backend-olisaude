@@ -3,6 +3,8 @@ package carlos.holanda.desafiobackendolisaude.model;
 import carlos.holanda.desafiobackendolisaude.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -16,9 +18,13 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @NotBlank
     private String name;
+    @NotNull
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Gender gender;
     @OneToMany(cascade = CascadeType.ALL)

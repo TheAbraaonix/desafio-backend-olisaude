@@ -5,6 +5,9 @@ import carlos.holanda.desafiobackendolisaude.dto.CustomerResponse;
 import carlos.holanda.desafiobackendolisaude.mapper.CustomerMapper;
 import carlos.holanda.desafiobackendolisaude.model.Customer;
 import carlos.holanda.desafiobackendolisaude.service.CustomerService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,20 +35,20 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerResponse> listById(@PathVariable Long id) {
+    public ResponseEntity<CustomerResponse> listById(@PathVariable @NotNull @Positive Long id) {
         CustomerResponse customerResponse = customerMapper.toDTO(customerService.listById(id));
         return ResponseEntity.status(HttpStatus.FOUND).body(customerResponse);
     }
 
     @PostMapping
-    public ResponseEntity<CustomerResponse> create(@RequestBody CustomerRequest customer) {
+    public ResponseEntity<CustomerResponse> create(@RequestBody @Valid @NotNull CustomerRequest customer) {
         Customer savedCustomer = customerService.create(customer);
         CustomerResponse customerResponse = customerMapper.toDTO(savedCustomer);
         return ResponseEntity.status(HttpStatus.CREATED).body(customerResponse);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<List<CustomerResponse>> delete(@PathVariable Long id) {
+    public ResponseEntity<List<CustomerResponse>> delete(@PathVariable @NotNull @Positive  Long id) {
         List<CustomerResponse> customerResponseList = customerService.delete(id)
                 .stream()
                 .map(customerMapper::toDTO)
