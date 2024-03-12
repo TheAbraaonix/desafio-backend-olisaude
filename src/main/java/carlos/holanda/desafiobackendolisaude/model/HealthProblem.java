@@ -1,6 +1,7 @@
 package carlos.holanda.desafiobackendolisaude.model;
 
 import carlos.holanda.desafiobackendolisaude.enums.Degree;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -19,6 +20,7 @@ public class HealthProblem {
     private Degree degree;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Customer customer;
 
     public HealthProblem() {
