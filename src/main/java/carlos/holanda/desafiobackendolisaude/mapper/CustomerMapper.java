@@ -4,9 +4,11 @@ import carlos.holanda.desafiobackendolisaude.dto.CustomerRequest;
 import carlos.holanda.desafiobackendolisaude.dto.CustomerResponse;
 import carlos.holanda.desafiobackendolisaude.dto.HealthProblemDTO;
 import carlos.holanda.desafiobackendolisaude.model.Customer;
+import carlos.holanda.desafiobackendolisaude.model.HealthProblem;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CustomerMapper {
@@ -16,7 +18,7 @@ public class CustomerMapper {
         }
         List<HealthProblemDTO> healthProblemsDTO = customer.getHealthProblems()
                 .stream()
-                .map(HealthProblemMapper::toDTO)
+                .map(healthProblem -> new HealthProblemDTO(healthProblem.getId(), healthProblem.getName(), healthProblem.getDegree()))
                 .toList();
 
         return new CustomerResponse(customer.getId(), customer.getName(), customer.getBirthDate(), customer.getGender(), healthProblemsDTO,
@@ -32,6 +34,20 @@ public class CustomerMapper {
         customer.setName(customerRequest.name());
         customer.setBirthDate(customerRequest.birthDate());
         customer.setGender(customerRequest.gender());
+
+        List<HealthProblem> healthProblems =  customerRequest.healthProblems()
+                .stream()
+                .map(healthProblemDTO -> {
+                    var healthProblem = new HealthProblem();
+                    healthProblem.setId(healthProblemDTO.id());
+                    healthProblem.setName(healthProblemDTO.name());
+                    healthProblem.setDegree(healthProblemDTO.degree());
+                    healthProblem.setCustomer(customer);
+                    return healthProblem;
+                })
+                .collect(Collectors.toList());
+        customer.setHealthProblems(healthProblems);
+
         return customer;
     }
 }

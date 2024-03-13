@@ -17,7 +17,7 @@ public class HealthProblem {
     private String name;
     @NotNull
     private Degree degree;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "customer_id", nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Customer customer;
@@ -53,5 +53,13 @@ public class HealthProblem {
 
     public void setDegree(Degree degree) {
         this.degree = degree;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

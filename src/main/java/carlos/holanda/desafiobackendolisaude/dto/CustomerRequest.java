@@ -14,6 +14,6 @@ public record CustomerRequest(
         @NotNull @NotBlank String name,
         @NotNull @JsonFormat(pattern = "dd/MM/yyyy") LocalDate birthDate,
         @NotNull Gender gender,
-        List<HealthProblem> healthProblems
+        List<HealthProblemDTO> healthProblems
 ) {
 }
