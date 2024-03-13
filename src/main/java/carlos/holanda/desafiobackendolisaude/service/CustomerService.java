@@ -1,6 +1,7 @@
 package carlos.holanda.desafiobackendolisaude.service;
 
 import carlos.holanda.desafiobackendolisaude.dto.CustomerRequest;
+import carlos.holanda.desafiobackendolisaude.dto.CustomerScoreDTO;
 import carlos.holanda.desafiobackendolisaude.dto.HealthProblemDTO;
 import carlos.holanda.desafiobackendolisaude.exception.RecordNotFoundException;
 import carlos.holanda.desafiobackendolisaude.mapper.CustomerMapper;
@@ -17,10 +18,12 @@ import java.util.List;
 public class CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+    private final HealthRiskCalculator healthRiskCalculator;
 
-    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
+    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper, HealthRiskCalculator healthRiskCalculator) {
         this.customerRepository = customerRepository;
         this.customerMapper = customerMapper;
+        this.healthRiskCalculator = healthRiskCalculator;
     }
 
     public List<Customer> listAll() {
@@ -29,6 +32,10 @@ public class CustomerService {
 
     public Customer listById(Long id) {
         return customerRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
+    }
+
+    public List<CustomerScoreDTO> getTopTenCustomers() {
+        return healthRiskCalculator.topTenCustomers();
     }
 
     public Customer create(CustomerRequest customer) {

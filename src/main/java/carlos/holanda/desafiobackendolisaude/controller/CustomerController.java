@@ -2,6 +2,7 @@ package carlos.holanda.desafiobackendolisaude.controller;
 
 import carlos.holanda.desafiobackendolisaude.dto.CustomerRequest;
 import carlos.holanda.desafiobackendolisaude.dto.CustomerResponse;
+import carlos.holanda.desafiobackendolisaude.dto.CustomerScoreDTO;
 import carlos.holanda.desafiobackendolisaude.mapper.CustomerMapper;
 import carlos.holanda.desafiobackendolisaude.model.Customer;
 import carlos.holanda.desafiobackendolisaude.service.CustomerService;
@@ -38,6 +39,11 @@ public class CustomerController {
     public ResponseEntity<CustomerResponse> listById(@PathVariable @NotNull @Positive Long id) {
         CustomerResponse customerResponse = customerMapper.toDTO(customerService.listById(id));
         return ResponseEntity.status(HttpStatus.FOUND).body(customerResponse);
+    }
+
+    @GetMapping("/topten")
+    public ResponseEntity<List<CustomerScoreDTO>> getTopTenCustomers() {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.getTopTenCustomers());
     }
 
     @PostMapping
