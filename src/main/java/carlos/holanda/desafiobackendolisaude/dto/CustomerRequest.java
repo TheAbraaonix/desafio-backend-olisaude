@@ -1,7 +1,6 @@
 package carlos.holanda.desafiobackendolisaude.dto;
 
 import carlos.holanda.desafiobackendolisaude.enums.Gender;
-import carlos.holanda.desafiobackendolisaude.model.HealthProblem;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
