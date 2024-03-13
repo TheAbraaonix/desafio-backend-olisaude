@@ -1,8 +1,9 @@
 package carlos.holanda.desafiobackendolisaude.model;
 
-import carlos.holanda.desafiobackendolisaude.enums.Degree;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -16,8 +17,10 @@ public class HealthProblem {
     @NotBlank
     private String name;
     @NotNull
-    private Degree degree;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @Min(1)
+    @Max(2)
+    private int degree;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Customer customer;
@@ -25,7 +28,7 @@ public class HealthProblem {
     public HealthProblem() {
     }
 
-    public HealthProblem(Long id, String name, Degree degree) {
+    public HealthProblem(Long id, String name, int degree) {
         this.id = id;
         this.name = name;
         this.degree = degree;
@@ -47,11 +50,11 @@ public class HealthProblem {
         this.name = name;
     }
 
-    public Degree getDegree() {
+    public int getDegree() {
         return degree;
     }
 
-    public void setDegree(Degree degree) {
+    public void setDegree(int degree) {
         this.degree = degree;
     }
 

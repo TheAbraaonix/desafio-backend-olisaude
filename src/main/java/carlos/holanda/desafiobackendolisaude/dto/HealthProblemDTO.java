@@ -1,10 +1,11 @@
 package carlos.holanda.desafiobackendolisaude.dto;
 
-import carlos.holanda.desafiobackendolisaude.enums.Degree;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 public record HealthProblemDTO(
 
         String name,
-        Degree degree
+        @Min(1) @Max(2) int degree
 ) {
 }
