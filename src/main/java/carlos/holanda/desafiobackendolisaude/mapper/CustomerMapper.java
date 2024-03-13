@@ -18,7 +18,7 @@ public class CustomerMapper {
         }
         List<HealthProblemDTO> healthProblemsDTO = customer.getHealthProblems()
                 .stream()
-                .map(healthProblem -> new HealthProblemDTO(healthProblem.getId(), healthProblem.getName(), healthProblem.getDegree()))
+                .map(healthProblem -> new HealthProblemDTO(healthProblem.getName(), healthProblem.getDegree()))
                 .toList();
 
         return new CustomerResponse(customer.getId(), customer.getName(), customer.getBirthDate(), customer.getGender(), healthProblemsDTO,
@@ -39,7 +39,6 @@ public class CustomerMapper {
                 .stream()
                 .map(healthProblemDTO -> {
                     var healthProblem = new HealthProblem();
-                    healthProblem.setId(healthProblemDTO.id());
                     healthProblem.setName(healthProblemDTO.name());
                     healthProblem.setDegree(healthProblemDTO.degree());
                     healthProblem.setCustomer(customer);

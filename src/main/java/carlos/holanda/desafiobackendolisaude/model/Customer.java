@@ -100,8 +100,7 @@ public class Customer {
         return updatedAt;
     }
 
-    @PreUpdate
-    public void setUpdatedAt() {
-        this.updatedAt = LocalDateTime.now();
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

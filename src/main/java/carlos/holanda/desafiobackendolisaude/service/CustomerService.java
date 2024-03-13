@@ -9,13 +9,14 @@ import carlos.holanda.desafiobackendolisaude.model.HealthProblem;
 import carlos.holanda.desafiobackendolisaude.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CustomerService {
-    private CustomerRepository customerRepository;
-    private CustomerMapper customerMapper;
+    private final CustomerRepository customerRepository;
+    private final CustomerMapper customerMapper;
 
     public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
@@ -41,13 +42,13 @@ public class CustomerService {
         existingCustomer.setName(customerRequest.name());
         existingCustomer.setBirthDate(customerRequest.birthDate());
         existingCustomer.setGender(customerRequest.gender());
+        existingCustomer.setUpdatedAt(LocalDateTime.now());
 
         List<HealthProblem> newHealthProblems = new ArrayList<>();
 
         if (customerRequest.healthProblems() != null) {
             for (HealthProblemDTO healthProblemDTO : customerRequest.healthProblems()) {
                 HealthProblem healthProblem = new HealthProblem();
-                healthProblem.setId(healthProblemDTO.id());
                 healthProblem.setName(healthProblemDTO.name());
                 healthProblem.setDegree(healthProblemDTO.degree());
                 healthProblem.setCustomer(existingCustomer);
