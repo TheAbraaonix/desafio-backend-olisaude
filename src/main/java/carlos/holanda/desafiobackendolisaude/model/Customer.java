@@ -50,6 +50,14 @@ public class Customer {
         this.updatedAt = updatedAt;
     }
 
+    public Customer(Long id, String name, LocalDate birthDate, Gender gender, LocalDateTime createdAt) {
+        this.id = id;
+        this.name = name;
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.createdAt = createdAt;
+    }
+
     public Long getId() {
         return id;
     }
