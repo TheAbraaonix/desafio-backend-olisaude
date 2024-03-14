@@ -4,6 +4,7 @@ import carlos.holanda.desafiobackendolisaude.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -28,6 +29,7 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "customer")
+    @NotEmpty
     private List<HealthProblem> healthProblems = new ArrayList<>();
     @CreationTimestamp
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
